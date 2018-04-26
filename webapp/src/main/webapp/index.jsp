@@ -1,1 +1,1 @@
-Hello, Freakster!
+Hello, Freak!
