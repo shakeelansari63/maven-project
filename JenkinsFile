@@ -3,17 +3,44 @@ pipeline {
   stages {
     stage('Initialize'){
       steps {
-        echo 'Hello there. This is initializing the testing process.'
-     }
+        build job: 'Freak-Test/first-test-job'
+       }
+        post {
+            success {
+                echo 'Test Complete'
+            }
+        }
     }
+
     stage('Build'){
       steps {
-        echo 'Now Building...'
+        build job: 'Freak-Test/maven-packaging-job'
+     }
+     post {
+        success{
+            echo 'Build Complete'
+        }
+        failure{
+            echo 'Build Fail'
+        }
      }
     }
+
     stage('Deploy'){
       steps {
-        echo 'Now Deploying...'
+        timeout(time:5, unit:'DAYS'){
+            input message: 'Please approve Checkstyle'
+        }
+
+        build job: 'Freak-test/checkstyle-maven'
+     }
+     post{
+        success{
+            echo 'Checkstyle Complete'
+        }
+        failure{
+            echo 'Checkstyle Fail'
+        }
      }
     }
   }
