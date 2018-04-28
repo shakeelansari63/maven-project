@@ -3,17 +3,17 @@ pipeline {
   stages {
     stage('Initialize'){
       steps {
-        echo 'Init and test...'
+        echo 'Hello there. This is initializing the testing process.'
      }
     }
     stage('Build'){
       steps {
-        echo 'Building...'
+        echo 'Now Building...'
      }
     }
     stage('Deploy'){
       steps {
-        echo 'Deploying...'
+        echo 'Now Deploying...'
      }
     }
   }
